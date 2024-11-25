@@ -1,3 +1,4 @@
+/* General Body Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -5,12 +6,14 @@ body {
     padding: 0;
 }
 
+/* Header Styling */
 h1 {
     text-align: center;
     margin-top: 20px;
     color: #333;
 }
 
+/* Table Styling */
 table {
     width: 80%;
     margin: 20px auto;
@@ -37,6 +40,7 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
+/* Pagination Styling */
 .pagination {
     text-align: center;
     margin: 20px;
@@ -55,4 +59,28 @@ tr:hover {
     background-color: #007bff;
     color: white;
     border: none;
+}
+
+/* Button Styling */
+.buttons {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border: 1px solid #007bff;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
