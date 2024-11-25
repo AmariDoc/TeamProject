@@ -10,7 +10,6 @@ if (!$result) {
     echo "Error fetching products: " . pg_last_error();
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +19,14 @@ if (!$result) {
 </head>
 <body>
     <h1>Product List</h1>
+
+    <!-- Navigation Buttons -->
+    <div class="buttons">
+        <a href="home.php" class="btn">Home</a>
+        <a href="addproduct.php" class="btn">Add Product</a>
+    </div>
+
+    <!-- Product Table -->
     <table>
         <thead>
             <tr>
