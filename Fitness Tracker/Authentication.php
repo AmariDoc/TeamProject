@@ -1,7 +1,13 @@
 <?php
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die("Invalid request method.");
+}
+
 // Start session
 session_start();
+
+include './functions/activity_log.php';
 
 // Authentication credentials
 $host = "localhost";
@@ -13,9 +19,11 @@ $port = "5432";
 // Create connection to PostgreSQL
 $conn = pg_connect("host=$host port=$port dbname=$db user=$user password=$pass");
 
-// Validate the connection
+// Check connection
 if (!$conn) {
     die("Connection failed: " . pg_last_error());
+} else {
+    echo "Connection successful."; // For debugging purposes only
 }
 
 // Get User Account Information
@@ -29,17 +37,23 @@ $result = pg_query_params($conn, $sql, array($username));
 // Check if a user exists
 if (pg_num_rows($result) > 0) {
     $user = pg_fetch_assoc($result);
-    if (hash_equals($user['password'], crypt($password, $user['password']))) {
-        // Store user info in the session
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
 
-        echo "Login successful! Welcome, " . $_SESSION['username'];
+// Use crypt() to verify the password
+    if (hash_equals($user['password'], crypt($password, $user['password']))) {
+        // Password is correct, create session and redirect
+        $_SESSION['username'] = $user['username'];
+        logActivity($username, 'login', 'Logged in successfully');
+        header("Location: Welcome.php");
     } else {
+        // Invalid password
+        // logUserActivity($username, 'login', 'Logged failed');
+        logActivity($username, 'login', 'Logged in failed');
         echo "Invalid password.";
     }
 } else {
-    echo "No user found with that username.";
+    echo "No user found with that username!";
 }
 
+// Close connection
+pg_close($conn);
 ?>
