@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Login Authentication</h2>
-    <form action="authentication.php" method="post">
+    <form action="Authentication (TP).php" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" required><br><br>
         <label for="password">Password</label>
