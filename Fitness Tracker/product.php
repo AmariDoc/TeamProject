@@ -6,8 +6,8 @@ include 'connection.php';
 $sql = "SELECT * FROM products";
 $result = pg_query($conn, $sql);
 
-if (!$result) {
-    echo "Error fetching products: " . pg_last_error();
+if ($result === false) {
+    echo "Error fetching products: " . pg_last_error($conn);
     exit;
 }
 ?>
